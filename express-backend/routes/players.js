@@ -32,4 +32,13 @@ router.get("/list/:id", async (req, res) => {
     }
 });
 
+let listArr = [];
+
+router.post("/list", async (req, res) => {
+    list = req.body;
+    console.log(list);
+    listArr.push(list);
+    res.send("item added!");
+})
+
 module.exports = router;
