@@ -3,7 +3,7 @@ const router = express.Router();
 
 let players = require("../dummyDatabase");
 
-router.get("/list", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         res.status(200).json({
             data: players
@@ -16,7 +16,7 @@ router.get("/list", async (req, res) => {
     }
 });
 
-router.get("/list/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     let { id } = req.params;
     id = Number(id);
     try {
@@ -32,13 +32,28 @@ router.get("/list/:id", async (req, res) => {
     }
 });
 
-let listArr = [];
-
-router.post("/list", async (req, res) => {
-    list = req.body;
-    console.log(list);
-    listArr.push(list);
+router.post("/", async (req, res) => {
+    const player = req.body;
+    if (!player) {
+        res.status(400).json({
+            message: "Must provide a player."
+        });
+    }
+    if (!player.name) {
+        res.status(400).json({
+            message: "Player must have a name."
+        });
+    }
+    if (!player.runs) {
+        res.status(400).json({
+            message: "Player must have a run time."
+        });
+    }
+    let playerIds = players.map((player) => player._id).sort((a, b) => a - b);
+    const newPlayerId = playerIds[playerIds.length-1] + 1;
+    player._id = newPlayerId;
+    players.push(player);
     res.send("item added!");
-})
+});
 
 module.exports = router;
