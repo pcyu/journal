@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
     }
     if (!player.runs) {
         res.status(400).json({
-            message: "Player must have a run time."
+            message: "Player must have a run."
         });
     }
     let playerIds = players.map((player) => player._id).sort((a, b) => a - b);
