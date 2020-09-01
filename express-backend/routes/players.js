@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
     }
     if (!player.name) {
         res.status(400).json({
-            message: "Player must have a name."
+            message: "Player must have a name"
         });
     }
     if (!player.runs) {
