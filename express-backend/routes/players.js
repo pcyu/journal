@@ -26,7 +26,7 @@ router.get("/list/:id", async (req, res) => {
         });
     } catch (err) {
         res.status(400).json({
-            message: "Some error occured",
+            message: "Some error occured.",
             err
         });
     }
